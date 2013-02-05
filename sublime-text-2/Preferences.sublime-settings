@@ -1,0 +1,14 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"default_line_ending": "unix",
+	"ensure_newline_at_eof_on_save": true,
+	"ignored_packages":
+	[
+	],
+	"translate_tabs_to_spaces": true,
+	"vintage_ctrl_keys": false,
+	"vintage_start_in_command_mode": true,
+	"vintage_use_clipboard": true,
+	"hot_exit": false,
+	"remember_open_files": false
+}
