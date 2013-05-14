@@ -122,6 +122,7 @@ set wildmode=list:longest
 call pathogen#infect()
 
 " Settings for vim-powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set laststatus=2
 let g:Powerline_symblos='fancy'
 
@@ -135,3 +136,5 @@ let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
 
+" set up browser for haskell_doc.vim
+let g:haddock_browser = "firefox"
