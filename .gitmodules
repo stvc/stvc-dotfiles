@@ -4,3 +4,9 @@
 [submodule ".vim/bundle/powerline"]
 	path = .vim/bundle/powerline
 	url = https://github.com/Lokaltog/powerline.git
+[submodule "powerline"]
+	path = powerline
+	url = /home/stvc/dotfiles/.vim/bundle/powerline
+[submodule "syntastic"]
+	path = syntastic
+	url = /home/stvc/dotfiles/.vim/bundle/syntastic
