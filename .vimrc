@@ -52,7 +52,9 @@ map <Leader>W :%s/\s\+$//
 
 " Color Scheme stuff
 set t_Co=256
-color wombat256mod
+"color wombat256mod
+color molokai
+let s:molokai_original=1
 "set background=dark
 highlight Normal ctermbg=None
 
@@ -125,6 +127,7 @@ call pathogen#infect()
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set laststatus=2
 let g:Powerline_symblos='fancy'
+let g:molokai_original=0
 
 " Settings for ctrlp
 let g:ctrlp_max_height=30
@@ -138,3 +141,6 @@ map <F4> :TlistToggle<cr>
 
 " set up browser for haskell_doc.vim
 let g:haddock_browser = "firefox"
+
+" shortcuts for Tabular
+vmap <Leader>= :Tab /=<CR>
