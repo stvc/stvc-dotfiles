@@ -143,4 +143,4 @@ map <F4> :TlistToggle<cr>
 let g:haddock_browser = "firefox"
 
 " shortcuts for Tabular
-vmap <Leader>= :Tab /=<CR>
+map <Leader>= :Tab /=<CR>
