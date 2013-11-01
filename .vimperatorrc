@@ -1,0 +1,8 @@
+map \\g :tabopen google 
+map \\a :tabopen amazon 
+map \\y :tabopen youtube 
+map \\\\ :tabopen yubnub 
+map \\s :tabopen startpage 
+map \\d :tabopen duckduckgo 
+map \\w :tabopen wolfram 
+
