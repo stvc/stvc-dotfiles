@@ -121,7 +121,7 @@ set wildmode=list:longest
 """
 
 " Pathogen stuff for loading plugins
-call pathogen#infect()
+execute pathogen#infect()
 
 " Settings for vim-powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
