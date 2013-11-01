@@ -139,6 +139,9 @@ let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
 
+" settings for syntastic
+let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/QtGui']
+
 " set up browser for haskell_doc.vim
 let g:haddock_browser = "firefox"
 
