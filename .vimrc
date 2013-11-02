@@ -131,6 +131,10 @@ let g:molokai_original=0
 
 " Settings for ctrlp
 let g:ctrlp_max_height=30
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': [],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 
