@@ -23,6 +23,9 @@ noremap <Leader>s :update<CR>
 "vnoremap <Leader>s <C-C>:update<CR>
 "inoremap <Leader>s <C-O>:update<CR>
 
+" quick reload file
+noremap <Leader>r :edit<CR>
+
 " quick close command
 noremap <Leader>e :quit<CR>
 
@@ -116,6 +119,10 @@ set virtualedit=block
 set timeoutlen=2000
 set wildmode=list:longest
 
+" auto close the preview window
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 """
 " Plugin Stuff
 """
@@ -151,3 +158,7 @@ let g:haddock_browser = "firefox"
 
 " shortcuts for Tabular
 map <Leader>= :Tab /=<CR>
+
+" settings for clang_complete
+let g:clang_user_options='|| exit 0'
+
