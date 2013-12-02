@@ -161,6 +161,6 @@ bar {
     status_command i3status -c ~/.i3/i3status.conf
 }
 
-exec xsetroot -solid "#101015"
+#exec xsetroot -solid "#101015"
 # exec dropboxd
 exec xbindkeys
