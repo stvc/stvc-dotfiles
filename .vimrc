@@ -12,6 +12,8 @@ set clipboard=unnamed
 set mouse=a
 set backspace=indent,eol,start
 
+set scroll=16
+
 let mapleader=","
 
 " quick leave insert mode
