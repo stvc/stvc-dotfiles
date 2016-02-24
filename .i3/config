@@ -13,12 +13,15 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+#font pango:DejaVu Sans Mono 9
+#font pango:Kanit Medium 9
+#font pango:RobotoMono Medium 9
+font pango:Kanit Bold 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -118,6 +121,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
+bindsym $mod+z scratchpad show
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -160,8 +165,21 @@ for_window [class="Speedcrunch"] floating enable
 # finds out, if available)
 bar {
     status_command i3status -c ~/.i3/i3status.conf
+    font pango:ShareTech Regular 11
+    tray_padding 5
+    separator_symbol " | "
+    colors {
+        focused_workspace #465457 #df5f00 #401500
+        urgent_workspace #465457 #e6db74 #401500
+        background #1b1d1e
+    }
 }
+
+client.focused #465457 #df5f00 #eeeeee #ffffff
+client.focused_inactive #465457 #465457 #d7e2e1 #f1e8ca
+client.urgent #465457 #e6db74 #401500 #401500
 
 #exec xsetroot -solid "#101015"
 # exec dropboxd
 exec xbindkeys
+exec screencloud

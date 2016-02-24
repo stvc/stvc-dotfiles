@@ -3,6 +3,21 @@ autocmd! bufwritepost .vimrc source %
 set nocompatible
 
 filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+
+call vundle#end()
+
 filetype plugin indent on
 syntax on
 
@@ -13,6 +28,8 @@ set mouse=a
 set backspace=indent,eol,start
 
 set scroll=16
+set laststatus=2
+let g:airline_powerline_fonts = 1
 
 let mapleader=","
 
@@ -30,6 +47,9 @@ noremap <Leader>r :edit<CR>
 
 " quick close command
 noremap <Leader>e :quit<CR>
+
+" quick open new tab
+noremap <Leader>c :tabnew<CR>
 
 " easy sort list
 vnoremap <Leader>s :sort<CR>
@@ -129,15 +149,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " Plugin Stuff
 """
 
-" Pathogen stuff for loading plugins
-execute pathogen#infect()
-
-" Settings for vim-powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-set laststatus=2
-let g:Powerline_symblos='fancy'
-let g:molokai_original=0
-
 " Settings for ctrlp
 let g:ctrlp_max_height=30
 let g:ctrlp_prompt_mappings = {
@@ -147,6 +158,7 @@ let g:ctrlp_prompt_mappings = {
     \ }
 set wildignore+=*.pyc
 set wildignore+=*_build/*
+set wildignore+=*.o
 
 " settings for taglist
 let Tlist_Ctags_Cmd = "/usr/bin/ctags"
@@ -159,9 +171,51 @@ let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/QtGui']
 " set up browser for haskell_doc.vim
 let g:haddock_browser = "firefox"
 
-" shortcuts for Tabular
-map <Leader>= :Tab /=<CR>
+" NERDTree options
+noremap <Leader>d :NERDTreeFind<CR>
 
-" settings for clang_complete
-let g:clang_user_options='|| exit 0'
+"""
+" hexmode stuff
+"""
+" ex command for toggling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
 
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries 
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
