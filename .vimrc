@@ -18,6 +18,7 @@ Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
+filetype plugin on
 filetype plugin indent on
 syntax on
 
@@ -27,6 +28,7 @@ set clipboard=unnamed
 set mouse=a
 set backspace=indent,eol,start
 
+set dir=/tmp//
 set scroll=16
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -62,11 +64,21 @@ nmap Q gqap
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
+" split config
+set splitbelow
+set splitright
+set winheight=35
+au VimEnter * set winminheight=5
+
 " easy move between splits
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
+
+" easy resize splits
+nnoremap <silent> + :resize +7<CR>
+nnoremap <silent> - :resize -7<CR>
 
 " easier moving of code blocks
 vnoremap < <gv
@@ -166,56 +178,58 @@ let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
 
 " settings for syntastic
-let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/QtGui']
+"let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/QtGui']
 
 " set up browser for haskell_doc.vim
 let g:haddock_browser = "firefox"
 
 " NERDTree options
-noremap <Leader>d :NERDTreeFind<CR>
+noremap <Leader><Leader> :NERDTreeFind<CR>
 
 """
 " hexmode stuff
 """
 " ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
+command! -bar Hexmode call ToggleHex()
 
 " helper function to toggle hex mode
-function ToggleHex()
-  " hex mode should be considered a read-only operation
-  " save values for modified and read-only for restoration later,
-  " and clear the read-only flag for now
-  let l:modified=&mod
-  let l:oldreadonly=&readonly
-  let &readonly=0
-  let l:oldmodifiable=&modifiable
-  let &modifiable=1
-  if !exists("b:editHex") || !b:editHex
-    " save old options
-    let b:oldft=&ft
-    let b:oldbin=&bin
-    " set new options
-    setlocal binary " make sure it overrides any textwidth, etc.
-    silent :e " this will reload the file without trickeries 
-              "(DOS line endings will be shown entirely )
-    let &ft="xxd"
-    " set status
-    let b:editHex=1
-    " switch to hex editor
-    %!xxd
-  else
-    " restore old options
-    let &ft=b:oldft
-    if !b:oldbin
-      setlocal nobinary
+if !exists("*ToggleHex")
+  function ToggleHex()
+    " hex mode should be considered a read-only operation
+    " save values for modified and read-only for restoration later,
+    " and clear the read-only flag for now
+    let l:modified=&mod
+    let l:oldreadonly=&readonly
+    let &readonly=0
+    let l:oldmodifiable=&modifiable
+    let &modifiable=1
+    if !exists("b:editHex") || !b:editHex
+      " save old options
+      let b:oldft=&ft
+      let b:oldbin=&bin
+      " set new options
+      setlocal binary " make sure it overrides any textwidth, etc.
+      silent :e " this will reload the file without trickeries 
+                "(DOS line endings will be shown entirely )
+      let &ft="xxd"
+      " set status
+      let b:editHex=1
+      " switch to hex editor
+      %!xxd
+    else
+      " restore old options
+      let &ft=b:oldft
+      if !b:oldbin
+        setlocal nobinary
+      endif
+      " set status
+      let b:editHex=0
+      " return to normal editing
+      %!xxd -r
     endif
-    " set status
-    let b:editHex=0
-    " return to normal editing
-    %!xxd -r
-  endif
-  " restore values for modified and read only state
-  let &mod=l:modified
-  let &readonly=l:oldreadonly
-  let &modifiable=l:oldmodifiable
-endfunction
+    " restore values for modified and read only state
+    let &mod=l:modified
+    let &readonly=l:oldreadonly
+    let &modifiable=l:oldmodifiable
+  endfunction
+endif
