@@ -15,6 +15,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'ervandew/supertab.git'
 
 call vundle#end()
 
@@ -67,8 +71,9 @@ map <Leader>m <esc>:tabnext<CR>
 " split config
 set splitbelow
 set splitright
-set winheight=35
-au VimEnter * set winminheight=5
+set winheight=15
+au VimEnter * set winminheight=7
+au VimEnter * set winheight=999
 
 " easy move between splits
 map <C-J> <C-W>j
@@ -179,12 +184,36 @@ map <F4> :TlistToggle<cr>
 
 " settings for syntastic
 "let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/QtGui']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" settings for supertab
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+if has("gui_running")
+    imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+    if has("unix")
+        inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x\<lt>c-o>")<cr>
+    endif
+endif
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " set up browser for haskell_doc.vim
 let g:haddock_browser = "firefox"
 
 " NERDTree options
 noremap <Leader><Leader> :NERDTreeFind<CR>
+
+" ghcmod-vim options
+noremap <Leader>tq :GhcModType<CR>
+noremap <Leader>tw :GhcModTypeInsert<CR>
+
 
 """
 " hexmode stuff
@@ -233,3 +262,4 @@ if !exists("*ToggleHex")
     let &modifiable=l:oldmodifiable
   endfunction
 endif
+
