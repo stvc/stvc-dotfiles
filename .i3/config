@@ -30,7 +30,7 @@ floating_modifier $mod
 hide_edge_borders both
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -x tmux -2
+bindsym $mod+Return exec i3-sensible-terminal -e tmux
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # kill focused window
@@ -189,3 +189,4 @@ client.urgent #465457 #e6db74 #401500 #401500
 exec xbindkeys
 exec screencloud
 exec compton --vsync opengl -CG
+exec setxkbmap -option caps:super
