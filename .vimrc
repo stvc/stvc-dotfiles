@@ -16,9 +16,16 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'eagletmt/ghcmod-vim'
+"Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
-Plugin 'ervandew/supertab.git'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'PProvost/vim-ps1'
+Plugin 'OrangeT/vim-csharp'
+Plugin 'vim-scripts/dbext.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'neovimhaskell/haskell-vim'
+Plugin 'fsharp/vim-fsharp'
+Plugin 'purescript-contrib/purescript-vim'
 
 call vundle#end()
 
@@ -37,19 +44,32 @@ set scroll=16
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = 'Ξ'
+
 let mapleader=","
 
 " quick leave insert mode
 inoremap kj <Esc>
 
 " quick save command
-noremap <Leader>w :update<CR>
-noremap <Leader>s :update<CR>
+noremap <Leader>w :write<CR>
+noremap <Leader>s :write<CR>
 "vnoremap <Leader>s <C-C>:update<CR>
 "inoremap <Leader>s <C-O>:update<CR>
 
 " quick reload file
 noremap <Leader>r :edit<CR>
+
+" keyword searching
+set hlsearch
+set ignorecase
+set smartcase
+
+" faster comma
+noremap ,, ,
 
 " quick close command
 noremap <Leader>e :quit<CR>
@@ -67,6 +87,7 @@ nmap Q gqap
 " quick switch tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+map gr <esc>:tabprevious<CR>
 
 " split config
 set splitbelow
@@ -155,7 +176,7 @@ augroup END
 set showmatch
 set ruler
 set virtualedit=block
-set timeoutlen=2000
+set timeoutlen=800
 set wildmode=list:longest
 
 " auto close the preview window
@@ -165,6 +186,9 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 """
 " Plugin Stuff
 """
+
+" Settings for fugitive
+nnoremap <Leader>gs :Gstatus<CR>
 
 " Settings for ctrlp
 let g:ctrlp_max_height=30
@@ -208,12 +232,21 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 let g:haddock_browser = "firefox"
 
 " NERDTree options
-noremap <Leader><Leader> :NERDTreeFind<CR>
+noremap <Leader>/ :NERDTreeFind<CR>
+
+" vim-markdown options
+map <Plug> <Plug>Markdown_MoveToCurHeader
 
 " ghcmod-vim options
-noremap <Leader>tq :GhcModType<CR>
-noremap <Leader>tw :GhcModTypeInsert<CR>
+"noremap <Leader>tq :GhcModType<CR>
+"noremap <Leader>tw :GhcModTypeInsert<CR>
 
+" dbext.vim options
+let g:dbext_default_profile_prof_name = 'type=SQLSRV:integratedlogin=1:srvname=hostname:dbname=dbname'
+
+" vim-fsharp options
+let g:fsharp_only_check_errors_on_write = 1
+let g:fsharp_map_prefix = 'cp'
 
 """
 " hexmode stuff

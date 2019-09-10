@@ -160,6 +160,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+for_window [class=".*"] border pixel 2
 for_window [window_role="testapp"] floating enable
 for_window [class="floater"] floating enable
 for_window [class="Steam"] floating enable
@@ -184,9 +185,13 @@ client.focused #465457 #df5f00 #eeeeee #ffffff
 client.focused_inactive #465457 #465457 #d7e2e1 #f1e8ca
 client.urgent #465457 #e6db74 #401500 #401500
 
+gaps inner 5
+gaps outer 0
+
 #exec xsetroot -solid "#101015"
 # exec dropboxd
 exec xbindkeys
 exec screencloud
-exec compton --vsync opengl -CG
+exec compton
 exec setxkbmap -option caps:super
+exec ~/.fehbg
