@@ -17,8 +17,13 @@ URxvt*color13:     rgb:cf/9e/be
 URxvt*color14:     rgb:71/be/be
 URxvt*color15:    rgb:ff/ff/ff
 
-URxvt.font:		xft:Inconsolata\-dz for Powerline:style=dz:size=10:antialias=true
+URxvt.font:		xft:Source Code Pro for Powerline:style=Regular:size=11:antialias=true
 URxvt.scrollBar:	false
+
+URxvt.buffered: true
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 URxvt.perl-ext-common:	default,matcher,resize-font
 URxvt.url-launcher:	/usr/bin/xdg-open
@@ -26,3 +31,11 @@ URxvt.matcher.button: 	1
 URxvt.resize-font.smaller:	M-n
 URxvt.resize-font.bigger:	M-m
 
+URxvt.transparent: true
+URxvt.shading: 20
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintfull
+!Xft.rgba: rgb

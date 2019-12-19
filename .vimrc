@@ -26,6 +26,9 @@ Plugin 'unblevable/quick-scope'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'fsharp/vim-fsharp'
 Plugin 'purescript-contrib/purescript-vim'
+Plugin 'neoclide/coc.nvim'
+"Plugin 'frigoeu/psc-ide-vim'
+Plugin 'lifepillar/pgsql.vim'
 
 call vundle#end()
 
@@ -34,13 +37,16 @@ filetype plugin indent on
 syntax on
 
 set pastetoggle=<F2>
-set clipboard=unnamed
+set clipboard^=unnamed,unnamedplus
 
 set mouse=a
 set backspace=indent,eol,start
 
+set showcmd
+
 set dir=/tmp//
 set scroll=16
+set scrolloff=4
 set laststatus=2
 let g:airline_powerline_fonts = 1
 
@@ -103,12 +109,15 @@ map <C-L> <C-W>l
 map <C-H> <C-W>h
 
 " easy resize splits
-nnoremap <silent> + :resize +7<CR>
-nnoremap <silent> - :resize -7<CR>
+"nnoremap <silent> + :resize +7<CR>
+"nnoremap <silent> - :resize -7<CR>
 
 " easier moving of code blocks
 vnoremap < <gv
 vnoremap > >gv
+
+" toggle line wrap
+noremap <F9> :set wrap!<CR>
 
 " Macro to delete whitespace
 map <Leader>W :%s/\s\+$//
@@ -140,9 +149,9 @@ set history=700
 set undolevels=700
 
 " TAB setup
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround
 set expandtab
 set autoindent
@@ -183,6 +192,11 @@ set wildmode=list:longest
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" set path
+if filereadable("./node_modules/.bin/purs")
+    let $PATH .= ':./node_modules/.bin/'
+endif
+
 """
 " Plugin Stuff
 """
@@ -192,11 +206,14 @@ nnoremap <Leader>gs :Gstatus<CR>
 
 " Settings for ctrlp
 let g:ctrlp_max_height=30
+let g:ctrlp_custom_ignore = 'node_modules\|target\|bower_components\|output'
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-p>'],
     \ 'AcceptSelection("v")': ['<c-v>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+let g:ctrlp_max_depth=40
+let g:ctrlp_max_files=0
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*.o
@@ -247,6 +264,16 @@ let g:dbext_default_profile_prof_name = 'type=SQLSRV:integratedlogin=1:srvname=h
 " vim-fsharp options
 let g:fsharp_only_check_errors_on_write = 1
 let g:fsharp_map_prefix = 'cp'
+
+" purescript settings
+autocmd FileType purescript setlocal tabstop=2
+autocmd FileType purescript setlocal shiftwidth=2
+autocmd FileType purescript setlocal softtabstop=2
+autocmd FileType purescript noremap <Leader>t :call CocAction('doHover')<CR>
+autocmd FileType purescript noremap <Leader><space> :CocList symbols<CR>
+
+" pgsql.vim settings
+au BufNewFile,BufRead *.psql let b:sql_type_override='pgsql' | setfiletype sql
 
 """
 " hexmode stuff
