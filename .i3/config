@@ -12,7 +12,7 @@
 set $mod Mod4
 
 gaps outer 0
-gaps inner 6
+gaps inner 4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -30,7 +30,7 @@ font pango:Kanit Bold 8
 floating_modifier $mod
 
 # hide vertical borders on edges
-hide_edge_borders both
+#hide_edge_borders both
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal -e tmux
@@ -142,29 +142,37 @@ bindsym $mod+period exec "xautolock -locknow"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+# non-window-manager shortcuts
+# snippet typer
+bindsym $mod+n exec "~/bin/typesnippet"
+
+# dunst notifications
+bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
+bindsym Ctrl+space exec --no-startup-id dunstctl close
 
 for_window [class=".*"] border pixel 2
 for_window [window_role="testapp"] floating enable
@@ -195,8 +203,10 @@ client.urgent #465457 #e6db74 #401500 #401500
 # exec dropboxd
 exec xbindkeys
 exec screencloud
-exec compton
+exec_always --no-startup-id picom -bf -i 0.98 --fade-delta=3
 exec setxkbmap -option caps:super
 exec ~/.fehbg
-exec dunst
+exec_always --no-startup-id dunst
 exec xautolock -time 10 -locker '/home/scain2/bin/lock'
+exec redshift-gtk -l 43.0722:-89.40123
+exec syncthing-gtk

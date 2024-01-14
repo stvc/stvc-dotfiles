@@ -17,7 +17,7 @@ URxvt*color13:     rgb:cf/9e/be
 URxvt*color14:     rgb:71/be/be
 URxvt*color15:    rgb:ff/ff/ff
 
-URxvt.font:		xft:Source Code Pro for Powerline:style=Regular:size=11:antialias=true
+URxvt.font:		xft:Source Code Pro for Powerline:style=Regular:size=10:antialias=true
 URxvt.scrollBar:	false
 
 URxvt.buffered: true
@@ -31,8 +31,8 @@ URxvt.matcher.button: 	1
 URxvt.resize-font.smaller:	M-n
 URxvt.resize-font.bigger:	M-m
 
-URxvt.transparent: true
-URxvt.shading: 20
+!URxvt.transparent: true
+!URxvt.shading: 10
 
 Xft.dpi: 96
 Xft.antialias: true

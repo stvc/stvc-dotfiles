@@ -27,6 +27,7 @@ Plugin 'neovimhaskell/haskell-vim'
 Plugin 'fsharp/vim-fsharp'
 Plugin 'purescript-contrib/purescript-vim'
 Plugin 'neoclide/coc.nvim'
+Plugin 'LnL7/vim-nix'
 "Plugin 'frigoeu/psc-ide-vim'
 Plugin 'lifepillar/pgsql.vim'
 
@@ -86,6 +87,8 @@ noremap <Leader>c :tabnew<CR>
 " easy sort list
 vnoremap <Leader>s :sort<CR>
 
+noremap <Leader>q :noh<CR>
+
 " easily format paragraphs
 vmap Q gq
 nmap Q gqap
@@ -101,6 +104,9 @@ set splitright
 set winheight=15
 au VimEnter * set winminheight=7
 au VimEnter * set winheight=999
+
+map <Space>s <C-W>J
+map <Space>v <C-W>L
 
 " easy move between splits
 map <C-J> <C-W>j
@@ -202,11 +208,11 @@ endif
 """
 
 " Settings for fugitive
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :G<CR>
 
 " Settings for ctrlp
 let g:ctrlp_max_height=30
-let g:ctrlp_custom_ignore = 'node_modules\|target\|bower_components\|output'
+let g:ctrlp_custom_ignore = 'dist\|node_modules\|target\|bower_components\|output'
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-p>'],
     \ 'AcceptSelection("v")': ['<c-v>'],
@@ -214,8 +220,9 @@ let g:ctrlp_prompt_mappings = {
     \ }
 let g:ctrlp_max_depth=40
 let g:ctrlp_max_files=0
+let g:ctrlp_working_path_mode = '' " don't use git root as working path
 set wildignore+=*.pyc
-set wildignore+=*_build/*
+set wildignore+=*_build/*,**/dist-newstyle/*
 set wildignore+=*.o
 
 " settings for taglist
@@ -243,6 +250,8 @@ else " no gui
     endif
 endif
 let g:haskellmode_completion_ghc = 1
+let g:haskell_indent_where = 0
+
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " set up browser for haskell_doc.vim
@@ -250,6 +259,7 @@ let g:haddock_browser = "firefox"
 
 " NERDTree options
 noremap <Leader>/ :NERDTreeFind<CR>
+let NERDTreeQuitOnOpen=1
 
 " vim-markdown options
 map <Plug> <Plug>Markdown_MoveToCurHeader
@@ -266,11 +276,12 @@ let g:fsharp_only_check_errors_on_write = 1
 let g:fsharp_map_prefix = 'cp'
 
 " purescript settings
-autocmd FileType purescript setlocal tabstop=2
-autocmd FileType purescript setlocal shiftwidth=2
-autocmd FileType purescript setlocal softtabstop=2
 autocmd FileType purescript noremap <Leader>t :call CocAction('doHover')<CR>
 autocmd FileType purescript noremap <Leader><space> :CocList symbols<CR>
+
+" haskell settings
+autocmd FileType haskell noremap <Leader>t :call CocAction('doHover')<CR>
+autocmd FileType haskell noremap <Leader><space> :CocList symbols<CR>
 
 " pgsql.vim settings
 au BufNewFile,BufRead *.psql let b:sql_type_override='pgsql' | setfiletype sql
