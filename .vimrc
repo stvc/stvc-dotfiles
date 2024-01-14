@@ -26,6 +26,7 @@ Plugin 'unblevable/quick-scope'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'fsharp/vim-fsharp'
 Plugin 'purescript-contrib/purescript-vim'
+Plugin 'neoclide/coc.nvim'
 
 call vundle#end()
 
@@ -79,6 +80,8 @@ noremap <Leader>c :tabnew<CR>
 
 " easy sort list
 vnoremap <Leader>s :sort<CR>
+
+noremap <leader>q :noh<CR>
 
 " easily format paragraphs
 vmap Q gq

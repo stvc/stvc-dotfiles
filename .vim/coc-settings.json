@@ -1,0 +1,37 @@
+{
+  "suggest.noselect": true,
+  "languageserver": {
+    "haskell": {
+      "command": "./hie",
+      "args": [ "--lsp" ],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
+      "initializationOptions": {
+        "languageServerHaskell": {
+        }
+      }
+    },
+    "purescript": {
+      "command": "purescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["purescript"],
+      "trace.server": "off",
+      "rootPatterns": ["spago.dhall"],
+      "settings": {
+        "purescript": {
+          "addSpagoSources": true,
+          "addNpmPath": true
+        }
+      }
+    }
+  }
+}
