@@ -1,0 +1,16 @@
+[user]
+    email = stevecain7@gmail.com
+    name = stvc
+
+[alias]
+    br = branch
+    co = checkout
+    l = log --oneline --decorate --all --graph
+    s = status
+
+[core]
+    editor = vim
+
+[init]
+    defaultBranch = master
+

@@ -87,7 +87,7 @@ noremap <Leader>c :tabnew<CR>
 " easy sort list
 vnoremap <Leader>s :sort<CR>
 
-noremap <Leader>q :noh<CR>
+noremap <leader>q :noh<CR>
 
 " easily format paragraphs
 vmap Q gq
