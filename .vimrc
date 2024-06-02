@@ -275,16 +275,28 @@ let g:dbext_default_profile_prof_name = 'type=SQLSRV:integratedlogin=1:srvname=h
 let g:fsharp_only_check_errors_on_write = 1
 let g:fsharp_map_prefix = 'cp'
 
+" pgsql.vim gettings
+gu BufNewFile,BufRead *.psql let b:sql_type_override='pgsql' | setfiletype sql
+
 " purescript settings
-autocmd FileType purescript noremap <Leader>t :call CocAction('doHover')<CR>
+"autocmd FileType purescript noremap <Leader>t :call CocAction('doHover')<CR>
 autocmd FileType purescript noremap <Leader><space> :CocList symbols<CR>
 
 " haskell settings
-autocmd FileType haskell noremap <Leader>t :call CocAction('doHover')<CR>
+"autocmd FileType haskell noremap <Leader>t :call CocAction('doHover')<CR>
 autocmd FileType haskell noremap <Leader><space> :CocList symbols<CR>
 
-" pgsql.vim settings
-au BufNewFile,BufRead *.psql let b:sql_type_override='pgsql' | setfiletype sql
+nnoremap <silent> <Leader>t :call <SID>show_documentation()<CR>
+
+nnoremap <Leader>t :call show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim', 'help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 """
 " hexmode stuff

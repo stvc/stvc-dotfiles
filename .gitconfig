@@ -1,16 +1,14 @@
 [user]
-    email = stevecain7@gmail.com
-    name = stvc
-
-[alias]
-    br = branch
-    co = checkout
-    l = log --oneline --decorate --all --graph
-    s = status
-
+	email = stevecain7@gmail.com
+	name = Steve Cain
 [core]
-    editor = vim
-
-[init]
-    defaultBranch = master
-
+  editor = vim
+[merge]
+  conflictstyle = diff3
+[alias]
+  a = add
+  br = branch
+  co = checkout
+  d = diff
+  l = log --oneline --decorate --all --graph
+  s = status --short

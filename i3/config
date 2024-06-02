@@ -74,11 +74,11 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+comma move workspace to output left
 bindsym $mod+Shift+period move workspace to output right
 
+# paste
+bindsym $mod+v exec xdotool keyup v super key "Shift_L+Insert"
+
 # split in horizontal orientation
 bindsym $mod+o split h
-
-# split in vertical orientation
-bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -180,6 +180,8 @@ for_window [class="floater"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Speedcrunch"] floating enable
 for_window [class="Zeal"] floating enable
+for_window [class="keepass2"] floating enable
+for_window [class="KeePass2"] floating enable
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -202,11 +204,12 @@ client.urgent #465457 #e6db74 #401500 #401500
 #exec xsetroot -solid "#101015"
 # exec dropboxd
 exec xbindkeys
-exec screencloud
+exec volctl
 exec_always --no-startup-id picom -bf -i 0.98 --fade-delta=3
-exec setxkbmap -option caps:super
+exec_always --no-startup-id setxkbmap -option caps:super
+exec redshift-gtk -l 43.072:-89.401
+exec_always --no-startup-id xinput set-prop "bcm5974" 311 0
 exec ~/.fehbg
 exec_always --no-startup-id dunst
 exec xautolock -time 10 -locker '/home/scain2/bin/lock'
-exec redshift-gtk -l 43.0722:-89.40123
 exec syncthing-gtk

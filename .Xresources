@@ -1,3 +1,10 @@
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
 URxvt*background: rgb:1a/1a/1a
 URxvt*foreground: rgb:d6/d6/d6
 URxvt*color0:     rgb:00/00/00
@@ -18,7 +25,11 @@ URxvt*color14:     rgb:71/be/be
 URxvt*color15:    rgb:ff/ff/ff
 
 URxvt.font:		xft:Source Code Pro for Powerline:style=Regular:size=10:antialias=true
+URxvt.italicFont: xft:Source Code Pro for Powerline:Italic:size=10
+URxvt.boldFont: xft:Source Code Pro for Powerline:Bold:size=10
+URxvt.letterSpace: -1
 URxvt.scrollBar:	false
+URxvt.geometry: 90x26
 
 URxvt.buffered: true
 
