@@ -4,16 +4,16 @@ finish
 endif
 let b:did_ftplugin = 1
 
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
-map <buffer> gd /def <C-R><C-W><CR>
+"map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
+"map <buffer> gd /def <C-R><C-W><CR>
 
-set foldmethod=expr
-set foldexpr=PythonFoldExpr(v:lnum)
-set foldtext=PythonFoldText()
+"set foldmethod=expr
+"set foldexpr=PythonFoldExpr(v:lnum)
+"set foldtext=PythonFoldText()
 
-map <buffer> <leader>f za
-map <buffer> F :call ToggleFold()<CR>
-let b:folded = 1
+"map <buffer> <leader>f za
+"map <buffer> F :call ToggleFold()<CR>
+"let b:folded = 1
 
 function! ToggleFold()
     if( b:folded == 0 )
